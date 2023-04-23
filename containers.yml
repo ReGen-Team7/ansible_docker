@@ -3,8 +3,8 @@
   hosts: localhost
   become: true
   vars:
-    ansible_python_interpreter: /path/to/python/interpreter/with/docker-py
-    
+    ansible_python_interpreter: /usr/bin/python
+
   tasks:
   - name: Install Docker
     apt:
