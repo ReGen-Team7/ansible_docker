@@ -2,7 +2,28 @@
 - name: Install Docker, download images, and start containers
   hosts: localhost
   become: true
+
   tasks:
+  - name: Install aptitude
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: true
+
+# Install docker prerequisites   
+  - name: Install required system packages
+    apt:
+      pkg:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+        - python3-pip
+        - virtualenv
+        - python3-setuptools
+      state: latest
+      update_cache: true
+  
   - name: Install Docker
     apt:
       name: docker.io
