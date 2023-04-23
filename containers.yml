@@ -1,0 +1,47 @@
+---
+- name: Install Docker, download images, and start containers
+  hosts: 68.219.215.155
+  become: true
+  tasks:
+  - name: Install Docker
+    apt:
+      name: docker.io
+      state: present
+  - name: Download Web Application image
+    docker_image:
+      name: eugenefltk/todoappwithlogin
+      source: pull
+  - name: Download MySQL Database image
+    docker_image:
+      name: mysql:5
+      source: pull
+  - name: Create Docker network
+    docker_network:
+      name:team7-network
+      state: present
+  - name: Start MySQL container
+    docker_container:
+      name: mysql-db
+      image: mysql:5
+      env:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_TLS_VERSION: "TLSv1.2"
+      networks:
+        - name:team7-network
+      state: started
+  - name: Start Web Application container
+    docker_container:
+      name: todoappwithlogin
+      image: eugenefltk/todoappwithlogin
+      env:
+        DB_HOST: localhost
+        DB_PORT: 3306
+        DB_USER: root
+        DB_USER_PASSWORD: root
+      ports:
+        - "8080:8080"
+      depends_on:
+        - mysql-db
+      networks:
+        - name:team7-network
+      state: started
