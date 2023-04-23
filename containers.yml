@@ -2,8 +2,8 @@
 - name: Install Docker, download images, and start containers
   hosts: localhost
   become: true
-  vars:
-    ansible_python_interpreter: /usr/bin/python
+  # vars:
+  #   ansible_python_interpreter: /usr/bin/python
 
   tasks:
   # Install the first required application on the virtual machine
@@ -26,11 +26,31 @@
         - python3-setuptools
       state: latest
       update_cache: true
-  
-  - name: Install Docker
-    apt:
-      name: docker.io
+
+  # Install docker keys to suppress the warning and error messages
+  - name: Add Docker GPG apt Key
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
       state: present
+    
+    # Add the repository to use when downloading Docker binaries
+  - name: Add Docker Repository
+    apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu focal stable
+      state: present
+
+    # Update cache and install Docker
+  - name: Update apt and install docker-ce
+    apt:
+      name: docker-ce
+      state: latest
+      update_cache: true
+
+    # Final step for Docker, install the module for Python
+  - name: Install Docker Module for Python
+    pip:
+        name: docker
+        state: latest
   - name: Download MySQL Database image
     docker_image:
       name: mysql:5
