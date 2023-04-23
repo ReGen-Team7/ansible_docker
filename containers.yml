@@ -2,7 +2,9 @@
 - name: Install Docker, download images, and start containers
   hosts: localhost
   become: true
-  
+  vars:
+    ansible_python_interpreter: /path/to/python/interpreter/with/docker-py
+    
   tasks:
   - name: Install Docker
     apt:
