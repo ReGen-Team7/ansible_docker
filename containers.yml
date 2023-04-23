@@ -10,11 +10,11 @@
   - name: Download Web Application image
     docker_image:
       name: eugenefltk/todoappwithlogin
-      source: pull
+      pull: yes
   - name: Download MySQL Database image
     docker_image:
       name: mysql:5
-      source: pull
+      pull: yes
   - name: Create Docker network
     docker_network:
       name: team7-network
