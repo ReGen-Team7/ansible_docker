@@ -31,13 +31,13 @@
     apt:
       name: docker.io
       state: present
-  - name: Download Web Application image
-    docker_image:
-      name: eugenefltk/todoappwithlogin
-      pull: yes
   - name: Download MySQL Database image
     docker_image:
       name: mysql:5
+      pull: yes
+  - name: Download Web Application image
+    docker_image:
+      name: eugenefltk/todoappwithlogin
       pull: yes
   - name: Create Docker network
     docker_network:
