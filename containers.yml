@@ -71,7 +71,7 @@
         MYSQL_ROOT_PASSWORD: root
         MYSQL_TLS_VERSION: "TLSv1.2"
       networks:
-        - name:team7-network
+        - name: team7-network
       state: started
   - name: Start Web Application container
     docker_container:
@@ -87,5 +87,5 @@
       depends_on:
         - mysql-db
       networks:
-        - name:team7-network
+        - name: team7-network
       state: started
