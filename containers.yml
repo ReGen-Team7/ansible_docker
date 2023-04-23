@@ -17,7 +17,7 @@
       source: pull
   - name: Create Docker network
     docker_network:
-      name:team7-network
+      name: team7-network
       state: present
   - name: Start MySQL container
     docker_container:
