@@ -70,7 +70,7 @@
       env:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_TLS_VERSION: "TLSv1.2"
-      ports:
+      published_ports:
         - "3306:3306"
       networks:
         - name: team7-network
@@ -84,7 +84,7 @@
         DB_PORT: 3306
         DB_USER: root
         DB_USER_PASSWORD: root
-      ports:
+      published_ports:
         - "8080:8080"
       networks:
         - name: team7-network
