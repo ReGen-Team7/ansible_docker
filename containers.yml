@@ -1,6 +1,6 @@
 ---
 - name: Install Docker, download images, and start containers
-  hosts: 68.219.215.155
+  hosts: localhost
   become: true
   tasks:
   - name: Install Docker
