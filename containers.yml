@@ -73,6 +73,11 @@
       networks:
         - name: team7-network
       state: started
+  - name: Open port 3306 for MySQL
+    firewalld:
+      port: 3306/tcp
+      permanent: yes
+      state: enabled
   - name: Start Web Application container
     docker_container:
       name: todoappwithlogin
