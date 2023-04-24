@@ -53,7 +53,7 @@
         state: latest
   - name: Download MySQL Database image
     docker_image:
-      name: mysql:5
+      name: mysql:5.7
       pull: yes
   - name: Download Web Application image
     docker_image:
@@ -66,14 +66,19 @@
   - name: Start MySQL container
     docker_container:
       name: mysql-db
-      image: mysql:5
+      image: mysql:5.7
       env:
         MYSQL_ROOT_PASSWORD: root
-      published_ports:
+      ports:
         - "3306:3306"
       networks:
         - name: team7-network
       state: started
+  - name: Wait for MySQL to be available
+    wait_for:
+      port: 3306
+      state: started
+      timeout: 60    
   - name: Start Web Application container
     docker_container:
       name: todoappwithlogin
@@ -83,7 +88,7 @@
       #   DB_PORT: 3306
       #   DB_USER: root
       #   DB_USER_PASSWORD: root
-      published_ports:
+      ports:
         - "8080:8080"
       networks:
         - name: team7-network
