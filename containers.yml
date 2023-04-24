@@ -57,7 +57,7 @@
       pull: yes
   - name: Download Web Application image
     docker_image:
-      name: testing1234556/regen
+      name: eugenefltk/todoappwithlogin
       pull: yes
   - name: Create Docker network
     docker_network:
@@ -82,7 +82,7 @@
   - name: Start Web Application container
     docker_container:
       name: todoappwithlogin
-      image: testing1234556/regen
+      image: eugenefltk/todoappwithlogin
       # env:
       #   DB_HOST: localhost
       #   DB_PORT: 3306
