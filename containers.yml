@@ -78,11 +78,11 @@
     docker_container:
       name: todoappwithlogin
       image: eugenefltk/todoappwithlogin
-      env:
-        DB_HOST: localhost
-        DB_PORT: 3306
-        DB_USER: root
-        DB_USER_PASSWORD: root
+      # env:
+      #   DB_HOST: localhost
+      #   DB_PORT: 3306
+      #   DB_USER: root
+      #   DB_USER_PASSWORD: root
       published_ports:
         - "8080:8080"
       networks:
