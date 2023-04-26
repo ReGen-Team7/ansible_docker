@@ -69,6 +69,7 @@
       image: mysql:5.7
       env:
         MYSQL_ROOT_PASSWORD: root
+        MYSQL_TLS_VERSION: "TLSv1.2"
       ports:
         - "3306:3306"
       networks:
@@ -83,11 +84,11 @@
     docker_container:
       name: todoappwithlogin
       image: eugenefltk/todoappwithlogin
-      # env:
-      #   DB_HOST: localhost
-      #   DB_PORT: 3306
-      #   DB_USER: root
-      #   DB_USER_PASSWORD: root
+      env:
+        DB_HOST: mysql-db
+        DB_PORT: 3306
+        DB_USER: root
+        DB_USER_PASSWORD: root
       ports:
         - "8080:8080"
       networks:
